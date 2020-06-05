@@ -41,7 +41,7 @@ _MOBILENET_V3_SMALL_FINAL_ENDPOINT = 'layer_13'
 _MOBILENET_EDGETPU = 'layer_24'
 
 @add_arg_scope
-def expanded_blocks(*args, **kwargs):
+def expanded_conv(*args, **kwargs):
   return conv_blocks.expanded_conv(*args, **kwargs)
 
 def _mobilenet_v2(net,
@@ -308,7 +308,7 @@ def mobilenet_v2_arg_scope(is_training=True,
       activation_fn=activation,
       normalizer_fn=slim.batch_norm), \
       slim.arg_scope(
-          [conv_blocks.expanded_conv], normalizer_fn=slim.batch_norm), \
+          [expanded_conv], normalizer_fn=slim.batch_norm), \
       slim.arg_scope([mobilenet.apply_activation], activation_fn=activation),\
       slim.arg_scope([slim.batch_norm], **batch_norm_params), \
       slim.arg_scope([mobilenet.mobilenet_base, mobilenet.mobilenet],
