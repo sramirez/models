@@ -41,8 +41,8 @@ _MOBILENET_V3_SMALL_FINAL_ENDPOINT = 'layer_13'
 _MOBILENET_EDGETPU = 'layer_24'
 
 @add_arg_scope
-def conv_blocks(x):
-  return conv_blocks(x)
+def expanded_blocks(*args, **kwargs):
+  return conv_blocks.expanded_conv(*args, **kwargs)
 
 def _mobilenet_v2(net,
                   depth_multiplier,
