@@ -48,6 +48,9 @@ def expanded_conv(*args, **kwargs):
 def apply_activation(*args, **kwargs):
   return mobilenet.apply_activation(*args, **kwargs)
 
+@add_arg_scope
+def mobilenet_base(*args, **kwargs):
+  return mobilenet.mobilenet_base(*args, **kwargs)
 
 def _mobilenet_v2(net,
                   depth_multiplier,
@@ -316,7 +319,7 @@ def mobilenet_v2_arg_scope(is_training=True,
           [expanded_conv], normalizer_fn=slim.batch_norm), \
       slim.arg_scope([apply_activation], activation_fn=activation),\
       slim.arg_scope([slim.batch_norm], **batch_norm_params), \
-      slim.arg_scope([mobilenet.mobilenet_base, mobilenet.mobilenet],
+      slim.arg_scope([mobilenet_base, mobilenet.mobilenet],
                      is_training=is_training),\
       slim.arg_scope([slim.dropout], **dropout_params), \
       slim.arg_scope([slim.instance_norm], **instance_norm_params), \
