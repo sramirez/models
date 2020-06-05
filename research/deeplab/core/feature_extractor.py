@@ -44,6 +44,11 @@ _MOBILENET_EDGETPU = 'layer_24'
 def expanded_conv(*args, **kwargs):
   return conv_blocks.expanded_conv(*args, **kwargs)
 
+@add_arg_scope
+def apply_activation(*args, **kwargs):
+  return mobilenet.apply_activation(*args, **kwargs)
+
+
 def _mobilenet_v2(net,
                   depth_multiplier,
                   output_stride,
@@ -309,7 +314,7 @@ def mobilenet_v2_arg_scope(is_training=True,
       normalizer_fn=slim.batch_norm), \
       slim.arg_scope(
           [expanded_conv], normalizer_fn=slim.batch_norm), \
-      slim.arg_scope([mobilenet.apply_activation], activation_fn=activation),\
+      slim.arg_scope([apply_activation], activation_fn=activation),\
       slim.arg_scope([slim.batch_norm], **batch_norm_params), \
       slim.arg_scope([mobilenet.mobilenet_base, mobilenet.mobilenet],
                      is_training=is_training),\
