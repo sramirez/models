@@ -39,6 +39,9 @@ _MOBILENET_V3_SMALL_FINAL_ENDPOINT = 'layer_13'
 # Default end point for EdgeTPU Mobilenet.
 _MOBILENET_EDGETPU = 'layer_24'
 
+@add_arg_scope
+def conv_blocks(x):
+  return conv_blocks(x)
 
 def _mobilenet_v2(net,
                   depth_multiplier,
